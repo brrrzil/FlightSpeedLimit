@@ -17,7 +17,7 @@ public class SpawnScript : MonoBehaviour
 
     private IEnumerator SpawnFlyer()
     {
-        spawnPosition = new Vector3(transform.position.x, transform.position.y + Random.Range(-7, 6.5f), transform.position.z);
+        spawnPosition = new Vector3(transform.position.x, transform.position.y + Random.Range(-10, 5), transform.position.z);
         Instantiate(flyer, spawnPosition, new Quaternion());
 
         //int i = Random.Range(0, sprites.Length - 1);
