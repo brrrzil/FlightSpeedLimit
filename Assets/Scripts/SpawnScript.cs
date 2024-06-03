@@ -1,29 +1,36 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SpawnScript : MonoBehaviour
 {
     [SerializeField] GameObject flyer;
-    //[SerializeField] Sprite[] sprites;
+    [SerializeField] private GameController gameController;
+    private float difficulty;
 
     private Vector3 spawnPosition;
     private float spawnLagTime;
+    private float minLag = 1, maxLag = 3;
 
-    private void Start()
+    private void Awake()
     {
         StartCoroutine(SpawnFlyer());
+        difficulty = gameController.Difficulty; //Сложность от 1 до 3
     }
 
     private IEnumerator SpawnFlyer()
     {
-        spawnPosition = new Vector3(transform.position.x, transform.position.y + Random.Range(-10, 5), transform.position.z);
+        //Спаун объекта
+        spawnPosition = new Vector3(transform.position.x, transform.position.y + Random.Range(-9, 4.5f), transform.position.z);
         Instantiate(flyer, spawnPosition, new Quaternion());
 
-        //int i = Random.Range(0, sprites.Length - 1);
-        //flyer.GetComponent<SpriteRenderer>().sprite = sprites[i];
+        //Задержка между спаунами сокращается в зависимости от сложности
+        minLag = minLag * ((200 - difficulty) / 200);
+        maxLag = maxLag * ((200 - difficulty) / 200);
 
-        spawnLagTime = Random.Range(0.5f, 2);
+        //Debug.Log(spawnLagTime + "\n" + "min = " + minLag + " max = " + maxLag);
+
+        spawnLagTime = Random.Range(minLag, maxLag);
+
         yield return new WaitForSeconds(spawnLagTime);
         StartCoroutine(SpawnFlyer());
     }

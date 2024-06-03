@@ -10,14 +10,13 @@ public class UIScript : MonoBehaviour
 
     private GameController gameController;
 
-    public void RestartButton()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    }
-
     private void Start()
     {
         gameController = new GameController();
-        SpeedLimitText.text = gameController.SpeedLimit.ToString();        
+    }
+
+    private void Update()
+    {
+        SpeedLimitText.text = gameController.SpeedLimit.ToString();
     }
 }

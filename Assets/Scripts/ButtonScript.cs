@@ -5,19 +5,33 @@ using UnityEngine.SceneManagement;
 
 public class ButtonScript : MonoBehaviour
 {
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void RestartButton()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void HomeButton()
+    {
+        SceneManager.LoadScene(0);
+    }
+
+    public void StartTutorialButton()
+    {
+        SceneManager.LoadScene(1);
+    }
+
+    public void StartEasyLevelButton()
+    {
+        SceneManager.LoadScene(2);
+    }
+
+    public void StartNormalLevelButton()
+    {
+        SceneManager.LoadScene(3);
+    }
+
+    public void StartHardLevelButton()
+    {
+        SceneManager.LoadScene(4);
     }
 }

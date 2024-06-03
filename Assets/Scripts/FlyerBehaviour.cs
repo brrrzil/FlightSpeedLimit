@@ -8,8 +8,15 @@ public class FlyerBehaviour : MonoBehaviour, IPointerClickHandler
 {
     [SerializeField] TMP_Text text;
     [SerializeField] Sprite[] sprites;
+    [SerializeField] private float minStartSpeed, maxStartSpeed;
+    [SerializeField] private Animator animator;
+    [SerializeField] private TMP_Text getScoreText;
 
     GameController gameController;
+    AudioSource audioSource;
+
+    private static float speedIncrease;
+    public float SpeedIncrease { get { return speedIncrease; } set { speedIncrease = value; } }
 
     private float speedLimit;
     private float speed; 
@@ -18,20 +25,37 @@ public class FlyerBehaviour : MonoBehaviour, IPointerClickHandler
 
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
+
         rb = GetComponent<Rigidbody>();
         rb.AddForce(Speed() / 10, 0, 0, ForceMode.Impulse);
 
         int i = Random.Range(0, sprites.Length - 1);
         GetComponent<SpriteRenderer>().sprite = sprites[i];
+
+        speedIncrease += 1;
     }
 
     public void OnPointerClick(PointerEventData eventData)
     {
+        audioSource.Play();
+
         rb.useGravity = true;
         gameObject.GetComponent<CapsuleCollider>().enabled = false;
 
-        if(isIntruder) { Debug.Log("You caught intruder"); }
-        else { Debug.Log("You fake");  }
+        if (isIntruder)
+        {
+            gameController.Score++;
+            animator.gameObject.SetActive(true);
+            getScoreText.text = "<color=green>+1</color>";
+        }
+
+        else
+        {
+            gameController.Score--;
+            animator.gameObject.SetActive(true);
+            getScoreText.text = "<color=red>-1</color>";
+        }
     }
 
     private float Speed()
@@ -40,9 +64,10 @@ public class FlyerBehaviour : MonoBehaviour, IPointerClickHandler
         speedLimit = gameController.SpeedLimit;
         Destroy(gameController);
 
-        speed = (float)Random.Range(40, 120);
-        text.text = speed.ToString();
-        if (speed > speedLimit) isIntruder = true;
+        speed = (float)Random.Range(minStartSpeed + speedIncrease, maxStartSpeed + speedIncrease);
+        text.text = ((int)speed).ToString();
+        if ((int)speed > (int)speedLimit) isIntruder = true;
+
         return speed;
     }
 
@@ -51,15 +76,13 @@ public class FlyerBehaviour : MonoBehaviour, IPointerClickHandler
         if (isIntruder)
         {
             gameController = new GameController();
-            gameController.Score--;
-            Debug.Log("Scores: " + gameController.Score);
+            gameController.Lives--;
             Destroy(gameController);
         }
 
         else {
             gameController = new GameController();
             gameController.Score++;
-            Debug.Log("Scores: " + gameController.Score);
             Destroy(gameController);
         }
 
