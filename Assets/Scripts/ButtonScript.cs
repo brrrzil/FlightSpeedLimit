@@ -1,37 +1,32 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class ButtonScript : MonoBehaviour
 {
+    [SerializeField] AudioSource audioSource;
+    private bool isPlaying = true;
+
     public void RestartButton()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
-    public void HomeButton()
+    public void GoToScene(int i)
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(i);
     }
 
-    public void StartTutorialButton()
+    public void MuteButton()
     {
-        SceneManager.LoadScene(1);
-    }
-
-    public void StartEasyLevelButton()
-    {
-        SceneManager.LoadScene(2);
-    }
-
-    public void StartNormalLevelButton()
-    {
-        SceneManager.LoadScene(3);
-    }
-
-    public void StartHardLevelButton()
-    {
-        SceneManager.LoadScene(4);
+        if (isPlaying)
+        {
+            audioSource.Pause();
+            isPlaying = false;
+        }
+        else
+        {
+            audioSource.Play();
+            isPlaying = true;
+        }
     }
 }

@@ -1,15 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
 public class GameController : MonoBehaviour
 {
-    [SerializeField] private float SetSpeedLimit;
-    [SerializeField, Range(1, 3)] private int difficulty;
+    [SerializeField] private float setSpeedLimit;
+    [SerializeField, Range(0, 3)] private int difficulty;
     [SerializeField] private int setLives;
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private GameObject gameOverPanel;
+    [SerializeField] private TMP_Text speedLimitText;
     [SerializeField] private TMP_Text yourScoresText, highScoresText;
 
     private bool isGameOver;
@@ -36,9 +35,10 @@ public class GameController : MonoBehaviour
     {
         flyerBehaviour.SpeedIncrease = 0;
         isGameOver = false;
-        SpeedLimit = SetSpeedLimit;
+        SpeedLimit = setSpeedLimit;
         scores = 0;
         lives = setLives;
+        speedLimitText.text = speedLimit.ToString();
     }
 
     void Update()

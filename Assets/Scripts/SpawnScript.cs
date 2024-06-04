@@ -27,8 +27,6 @@ public class SpawnScript : MonoBehaviour
         minLag = minLag * ((200 - difficulty) / 200);
         maxLag = maxLag * ((200 - difficulty) / 200);
 
-        //Debug.Log(spawnLagTime + "\n" + "min = " + minLag + " max = " + maxLag);
-
         spawnLagTime = Random.Range(minLag, maxLag);
 
         yield return new WaitForSeconds(spawnLagTime);

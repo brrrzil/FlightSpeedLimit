@@ -164,9 +164,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 698950309}
     - target: {fileID: 5312224980899387506, guid: 9b9ac70397a21bf49a6f8520c57e33e8, type: 3}
+      propertyPath: setSpeedLimit
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 5312224980899387506, guid: 9b9ac70397a21bf49a6f8520c57e33e8, type: 3}
       propertyPath: highScoresText
       value: 
       objectReference: {fileID: 867544354}
+    - target: {fileID: 5312224980899387506, guid: 9b9ac70397a21bf49a6f8520c57e33e8, type: 3}
+      propertyPath: speedLimitText
+      value: 
+      objectReference: {fileID: 7354017246646911910}
     - target: {fileID: 5312224980899387506, guid: 9b9ac70397a21bf49a6f8520c57e33e8, type: 3}
       propertyPath: yourScoresText
       value: 
@@ -791,9 +799,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1466990516500601036, guid: b426a73ce96782a43894b83e0490c96b, type: 3}
+      propertyPath: audioSource
+      value: 
+      objectReference: {fileID: 963194231}
     - target: {fileID: 5354008954084526331, guid: b426a73ce96782a43894b83e0490c96b, type: 3}
       propertyPath: m_Name
       value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 5564367921012665867, guid: b426a73ce96782a43894b83e0490c96b, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8924112716786943118, guid: b426a73ce96782a43894b83e0490c96b, type: 3}
       propertyPath: m_Pivot.x
@@ -880,6 +896,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b426a73ce96782a43894b83e0490c96b, type: 3}
+--- !u!114 &7354017246646911910 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 964136474494929817, guid: b426a73ce96782a43894b83e0490c96b, type: 3}
+  m_PrefabInstance: {fileID: 7354017246646911909}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

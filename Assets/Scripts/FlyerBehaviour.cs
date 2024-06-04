@@ -1,8 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.EventSystems;
+
+[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(AudioSource))]
 
 public class FlyerBehaviour : MonoBehaviour, IPointerClickHandler
 {
@@ -41,7 +42,7 @@ public class FlyerBehaviour : MonoBehaviour, IPointerClickHandler
         audioSource.Play();
 
         rb.useGravity = true;
-        gameObject.GetComponent<CapsuleCollider>().enabled = false;
+        gameObject.GetComponent<CapsuleCollider>().enabled = false; // Отключаем коллайдер, чтобы не было столкновения с финишем
 
         if (isIntruder)
         {
@@ -59,12 +60,12 @@ public class FlyerBehaviour : MonoBehaviour, IPointerClickHandler
     }
 
     private float Speed()
-    {
+    {        
         gameController = new GameController();
         speedLimit = gameController.SpeedLimit;
         Destroy(gameController);
 
-        speed = (float)Random.Range(minStartSpeed + speedIncrease, maxStartSpeed + speedIncrease);
+        speed = Random.Range(minStartSpeed + speedIncrease, maxStartSpeed + speedIncrease); // Скорость увеличивается с появлением каждого летуна
         text.text = ((int)speed).ToString();
         if ((int)speed > (int)speedLimit) isIntruder = true;
 
@@ -73,19 +74,19 @@ public class FlyerBehaviour : MonoBehaviour, IPointerClickHandler
 
     private void OnTriggerEnter(Collider other)
     {
+        gameController = new GameController();
+
         if (isIntruder)
         {
-            gameController = new GameController();
             gameController.Lives--;
-            Destroy(gameController);
         }
 
-        else {
-            gameController = new GameController();
+        else
+        {
             gameController.Score++;
-            Destroy(gameController);
         }
-
+        
+        Destroy(gameController);
         Destroy(gameObject);
     }
 }
